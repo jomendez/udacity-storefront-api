@@ -1,8 +1,8 @@
 import express, { Request, Response } from 'express';
 import dotenv from 'dotenv';
-import userRoutes from './controllers/usersController';
-import productRoutes from './controllers/productControllers';
-import orderRoutes from './controllers/ordersController';
+import userRoutes from './handler/usersController';
+import productRoutes from './handler/productControllers';
+import orderRoutes from './handler/ordersController';
 
 dotenv.config();
 
