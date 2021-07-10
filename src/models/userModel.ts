@@ -37,8 +37,8 @@ export class UserModel {
 
 			connection.release();
 
-			const first =  result.rows[0];
-      return first;
+			const first = result.rows[0];
+			return first;
 		} catch (err) {
 			throw new Error(`Unable to retrieve user ${id}: ${err}`);
 		}
@@ -67,7 +67,9 @@ export class UserModel {
 
 			return serultUser;
 		} catch (err) {
-			throw new Error(`Unable to create user (${userObj.userName}): ${err}`);
+			throw new Error(
+				`Unable to create user (${userObj.userName}): ${err}`
+			);
 		}
 	}
 
@@ -87,7 +89,7 @@ export class UserModel {
 				userObj.firstName,
 				userObj.lastName,
 				hash,
-				userObj.id,
+				userObj.id
 			]);
 			const first = result.rows[0];
 
@@ -95,7 +97,9 @@ export class UserModel {
 
 			return first;
 		} catch (err) {
-			throw new Error(`Unable to create user (${userObj.userName}): ${err}`);
+			throw new Error(
+				`Unable to create user (${userObj.userName}): ${err}`
+			);
 		}
 	}
 
@@ -128,7 +132,9 @@ export class UserModel {
 		if (result.rows.length) {
 			const firstResultUser = result.rows[0];
 
-			if (bcrypt.compareSync(password + pepper, firstResultUser.password)) {
+			if (
+				bcrypt.compareSync(password + pepper, firstResultUser.password)
+			) {
 				connection.release();
 				return firstResultUser;
 			}

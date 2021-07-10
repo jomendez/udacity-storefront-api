@@ -17,7 +17,7 @@ const {
 let client;
 
 if (!!ENV && ENV === 'dev') {
-	connect ={
+	connect = {
 		host: POSTGRES_HOST,
 		database: POSTGRES_DB,
 		user: POSTGRES_USER,
@@ -32,15 +32,14 @@ if (!!ENV && ENV === 'test') {
 		user: POSTGRES_USER,
 		password: POSTGRES_PASSWORD
 	};
-
-
-
 }
 
 const pool = new Pool(connect);
 
-pool.on("connect", () => {
-    console.log(`${process.env.NODE_ENV} environment config loaded, db connection established`);
+pool.on('connect', () => {
+	console.log(
+		`${process.env.NODE_ENV} environment config loaded, db connection established`
+	);
 });
 
 export default pool;

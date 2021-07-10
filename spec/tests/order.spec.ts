@@ -4,7 +4,10 @@ import { ProductModel } from '../../src/models/productModel';
 import supertest from 'supertest';
 import app from '../../src/server';
 import client from '../../src/db';
-import { mockedUserObjectOne, mockedProductObjectOne } from '../mock_data/mock_data';
+import {
+	mockedUserObjectOne,
+	mockedProductObjectOne
+} from '../mock_data/mock_data';
 
 const userModel = new UserModel();
 const productModel = new ProductModel();

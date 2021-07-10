@@ -29,7 +29,7 @@ export class ProductModel {
 
 			connection.release();
 			const first = result.rows[0];
-      return first;
+			return first;
 		} catch (err) {
 			throw new Error(`Unable to retrieve product: ${err}`);
 		}
@@ -41,14 +41,20 @@ export class ProductModel {
 			const sql =
 				'INSERT INTO products ("name", "price", "category") VALUES ($1, $2, $3) RETURNING *';
 
-			const result = await connection.query(sql, [product.name, product.price, product.category]);
+			const result = await connection.query(sql, [
+				product.name,
+				product.price,
+				product.category
+			]);
 
 			const firstProduct = result.rows[0];
 			connection.release();
 
 			return firstProduct;
 		} catch (err) {
-			throw new Error(`Unable to create Product (${product.name}): ${err}`);
+			throw new Error(
+				`Unable to create Product (${product.name}): ${err}`
+			);
 		}
 	}
 

@@ -180,8 +180,8 @@ describe('User Model', () => {
 		});
 
 		it('Test edit should return edited User', async () => {
-      const editedMockUser = { id:1, ...mockedUserObjectOne};
-      editedMockUser.firstName = 'Edited'
+			const editedMockUser = { id: 1, ...mockedUserObjectOne };
+			editedMockUser.firstName = 'Edited';
 			const response = await request
 				.patch('/users/2')
 				.set('Authorization', 'Bearer ' + userToken)

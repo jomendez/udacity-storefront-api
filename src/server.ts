@@ -13,14 +13,13 @@ const address = `0.0.0.0:${EXPRESS_PORT}`;
 
 app.use(express.json());
 
-app.get('/', (req: Request, res: Response)=> {
+app.get('/', (req: Request, res: Response) => {
 	res.send('Hello Storefront!');
 });
 
-app.listen(3000, ()=> {
+app.listen(3000, () => {
 	console.log(`starting on: ${address}`);
 });
-
 
 productRoutes(app);
 userRoutes(app);

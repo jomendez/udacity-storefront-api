@@ -20,24 +20,30 @@ TOKEN_SECRET=mysecrettoken123
 ```
 
 ## Database setup
-
-Run the following commands:
-`npm install -g db-migrate`
-Install the package to the project:
-`npm i db-migrate db-migrate-pg --save-dev`
-
-We recomend you to install Docker in your computer, then:
-run the following command to run a docker instance of postgres (it will use the .env file as reference for credentials and database name)
-`docker-compose up`
-
-### Migrations
-Bring the migration up `db-migrate up`
-Bring the migration down `db-migrate down`
+ - Install the migration package globally: `npm install -g db-migrate`
+ - Install the migration package in the project: `npm i db-migrate db-migrate-pg --save-dev`
+ - Install and run the latest Official postgres docker image - command `docker-compose up` this command will also automatically create a DataBase (specified in the `.env` file) with the user and pass also specified in the `.env` file
+ - Port used: Default postgres port 5432 (specified in the `docker-composed.yml` file)
+ - Production database - storefront (specified in the `.env` file)
+ - Test Database - storefront_test (specified in the `.env` file)
+ - User: postgres_storefront (specified in the `.env` file)
+ - Password: password123 (specified in the `.env` file)
+ - Create all the tables in the database - command `db-migrate up` 
 
 
 ### What ports the backend and database are running on
 node: 3000
 postgres: 5432
+
+
+# npm scripts
+- `npm run build` - build production version of app in ./dist/ folder - "build": "npx tsc"
+- `npm run start-dev` - start development app /w nodemon monitoring for changes - "start-dev": "nodemon src/server.ts"
+- `npm run start-prod` - Start production app from ./dist folder - "start-prod": "node ./dist/server.js"
+- `npm run test` - create test database, run jasmine, then drop test database. 
+- `npm run prettier` - run prettier check - "prettier": "npx prettier **/*.ts --check"
+- `npm run lint` - run lint with prettier plugin, and auto fix issues. - "lint": "eslint **/*.ts --fix --quiet" 
+
 
 ## Getting Started
 

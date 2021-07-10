@@ -69,7 +69,10 @@ const authenticate = async (req: Request, res: Response) => {
 	};
 
 	try {
-		const user = await store.authenticate(userObj.userName, userObj.password);
+		const user = await store.authenticate(
+			userObj.userName,
+			userObj.password
+		);
 		const token = jwt.sign(
 			{
 				user

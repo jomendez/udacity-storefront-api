@@ -65,7 +65,10 @@ export class OrderModel {
 			const sql =
 				'INSERT INTO orders ("user_id", "complete") VALUES ($1, $2) RETURNING *';
 
-			const queryResult = await connection.query(sql, [order.user_id, order.complete]);
+			const queryResult = await connection.query(sql, [
+				order.user_id,
+				order.complete
+			]);
 			const firstOrder = queryResult.rows[0];
 
 			connection.release();
@@ -82,7 +85,11 @@ export class OrderModel {
 			const sql =
 				'UPDATE orders SET "user_id" = $1, "complete" = $2 WHERE "id" = $3 RETURNING *';
 
-			const queryResult = await connection.query(sql, [order.user_id, order.complete, order.id]);
+			const queryResult = await connection.query(sql, [
+				order.user_id,
+				order.complete,
+				order.id
+			]);
 			const firstOrder = queryResult.rows[0];
 
 			connection.release();
@@ -96,7 +103,10 @@ export class OrderModel {
 	async delete(id: number): Promise<Order> {
 		try {
 			const connection = await client.connect();
-			const queryResult = await connection.query('DELETE FROM orders WHERE "id"=$1 RETURNING *', [id]);
+			const queryResult = await connection.query(
+				'DELETE FROM orders WHERE "id"=$1 RETURNING *',
+				[id]
+			);
 			const firstOrder = queryResult.rows[0];
 			return firstOrder;
 		} catch (err) {
@@ -126,7 +136,10 @@ export class OrderModel {
 			const connection = await client.connect();
 			const sql =
 				'SELECT op."order_id" AS id, op."quantity", p."name" AS product, p."price" AS price FROM order_products AS op JOIN products AS p ON p."id" = op."product_id" WHERE "order_id" = $1 AND "product_id" = $2';
-			const queryResult = await connection.query(sql, [order_id, product_id]);
+			const queryResult = await connection.query(sql, [
+				order_id,
+				product_id
+			]);
 			return queryResult.rows[0];
 		} catch (err) {
 			throw new Error(
@@ -138,11 +151,14 @@ export class OrderModel {
 	async addOrderProduct(orderProduct: OrderProduct): Promise<OrderProduct> {
 		try {
 			const connection = await client.connect();
-			const queryResult = await connection.query('INSERT INTO order_products ("quantity", "order_id", "product_id") VALUES ($1, $2, $3) RETURNING *', [
-				orderProduct.quantity,
-				orderProduct.order_id,
-				orderProduct.product_id
-			]);
+			const queryResult = await connection.query(
+				'INSERT INTO order_products ("quantity", "order_id", "product_id") VALUES ($1, $2, $3) RETURNING *',
+				[
+					orderProduct.quantity,
+					orderProduct.order_id,
+					orderProduct.product_id
+				]
+			);
 
 			const firstOrderProduct = queryResult.rows[0];
 
@@ -163,7 +179,10 @@ export class OrderModel {
 		try {
 			const connection = await client.connect();
 
-			const queryResult = await connection.query('DELETE FROM order_products WHERE "order_id"=$1 AND "product_id"=$2 RETURNING *', [order_id, product_id]);
+			const queryResult = await connection.query(
+				'DELETE FROM order_products WHERE "order_id"=$1 AND "product_id"=$2 RETURNING *',
+				[order_id, product_id]
+			);
 			const orderProduct = queryResult.rows[0];
 
 			connection.release();
@@ -179,12 +198,15 @@ export class OrderModel {
 		try {
 			const connection = await client.connect();
 
-			const queryResult = await connection.query('UPDATE order_products SET "quantity" = $1, "order_id" = $2,  "product_id" = $3 WHERE "id" = $4 RETURNING *', [
-				orderProduct.quantity,
-				orderProduct.order_id,
-				orderProduct.product_id,
-				orderProduct.id
-			]);
+			const queryResult = await connection.query(
+				'UPDATE order_products SET "quantity" = $1, "order_id" = $2,  "product_id" = $3 WHERE "id" = $4 RETURNING *',
+				[
+					orderProduct.quantity,
+					orderProduct.order_id,
+					orderProduct.product_id,
+					orderProduct.id
+				]
+			);
 
 			const firstOrderProduct = queryResult.rows[0];
 

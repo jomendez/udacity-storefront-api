@@ -3,7 +3,12 @@ import { UserModel } from '../../src/models/userModel';
 import supertest from 'supertest';
 import app from '../../src/server';
 import client from '../../src/db';
-import { mockedUserObjectOne, mockedProductObjectOne, mockedProductObjectTwo, IProductAssert } from '../mock_data/mock_data';
+import {
+	mockedUserObjectOne,
+	mockedProductObjectOne,
+	mockedProductObjectTwo,
+	IProductAssert
+} from '../mock_data/mock_data';
 
 const userModel = new UserModel();
 const productModel = new ProductModel();
@@ -36,15 +41,13 @@ describe('Product Model', () => {
 	describe('Test methods return correct values', () => {
 		it('Create method should return a Product', async () => {
 			const result = await productModel.create(mockedProductObjectOne);
-      const obj: IProductAssert = {
-        name: mockedProductObjectOne.name,
-        price: mockedProductObjectOne.price.toString(),
-        category: mockedProductObjectOne.category
-      };
-      obj.price += '' ;
-			expect(result).toEqual(
-				jasmine.objectContaining(obj)
-			);
+			const obj: IProductAssert = {
+				name: mockedProductObjectOne.name,
+				price: mockedProductObjectOne.price.toString(),
+				category: mockedProductObjectOne.category
+			};
+			obj.price += '';
+			expect(result).toEqual(jasmine.objectContaining(obj));
 		});
 
 		it('Index method should return array of users with testUser in it', async () => {
@@ -66,14 +69,17 @@ describe('Product Model', () => {
 		});
 
 		it('Edit method should return a product with edited properties', async () => {
-      const editedUser: IProductAssert = {
-        name: mockedProductObjectOne.name,
-        price: mockedProductObjectOne.price.toString(),
-        category: mockedProductObjectOne.category
-      };
-      editedUser.id = 1;
+			const editedUser: IProductAssert = {
+				name: mockedProductObjectOne.name,
+				price: mockedProductObjectOne.price.toString(),
+				category: mockedProductObjectOne.category
+			};
+			editedUser.id = 1;
 
-			const result = await productModel.edit({id: 1, ...mockedProductObjectOne});
+			const result = await productModel.edit({
+				id: 1,
+				...mockedProductObjectOne
+			});
 			expect(result).toEqual(
 				jasmine.objectContaining({
 					price: editedUser.price.toString()
@@ -162,13 +168,13 @@ describe('Product Model', () => {
 		});
 
 		it('Test edit should return edited User', async () => {
-      const editedUser: IProductAssert = {
-        name: mockedProductObjectOne.name,
-        price: mockedProductObjectOne.price.toString(),
-        category: mockedProductObjectOne.category
-      };
-      editedUser.id = 3;
-      editedUser.price = '199.99';
+			const editedUser: IProductAssert = {
+				name: mockedProductObjectOne.name,
+				price: mockedProductObjectOne.price.toString(),
+				category: mockedProductObjectOne.category
+			};
+			editedUser.id = 3;
+			editedUser.price = '199.99';
 			const response = await request
 				.patch('/products/2')
 				.set('Authorization', 'Bearer ' + userToken)
