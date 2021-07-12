@@ -22,7 +22,7 @@ TOKEN_SECRET=mysecrettoken123
 ## Database setup
  - Install the migration package globally: `npm install -g db-migrate`
  - Install the migration package in the project: `npm i db-migrate db-migrate-pg --save-dev`
- - Install and run the latest Official postgres docker image - command `docker-compose up` this command will also automatically create a DataBase (specified in the `.env` file) with the user and pass also specified in the `.env` file
+ - Install and run the postgres docker image - command `docker-compose up` this command will also automatically create a DataBase (specified in the `.env` file) with the user and pass also specified in the `.env` file
  - Port used: Default postgres port 5432 (specified in the `docker-composed.yml` file)
  - Production database - storefront (specified in the `.env` file)
  - Test Database - storefront_test (specified in the `.env` file)
